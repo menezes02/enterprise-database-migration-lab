@@ -8,3 +8,9 @@
   ansible.builtin.apt:
     name: "{{ linux_baseline_packages }}"
     state: present
+
+- name: Ensure auditd is enabled and running
+  ansible.builtin.service:
+    name: auditd
+    enabled: true
+    state: started
