@@ -1,0 +1,57 @@
+# Terraform working directories
+**/.terraform/*
+
+# Terraform state
+*.tfstate
+*.tfstate.*
+.terraform.tfstate.lock.info
+
+# Terraform plans
+*.plan
+*.tfplan
+
+# Terraform variable files that may contain secrets
+*.tfvars
+*.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
+
+# Terraform crash and override files
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Virtual machine images and installation media
+*.qcow2
+*.img
+*.iso
+*.raw
+*.vmdk
+
+# Secrets and credentials
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+
+# Ansible secrets
+**/vault-password*
+**/*vault*.yml
+
+# Editor and operating-system files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
