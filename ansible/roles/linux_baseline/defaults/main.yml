@@ -6,5 +6,14 @@ linux_baseline_packages:
   - git
   - htop
   - jq
+  - ufw
   - unzip
   - vim
+
+linux_baseline_timezone: Etc/UTC
+linux_baseline_environment: Lab
+
+linux_baseline_ssh_port: 22
+linux_baseline_manage_firewall: false
+
+linux_baseline_motd_title: Enterprise Database Migration and Security Lab

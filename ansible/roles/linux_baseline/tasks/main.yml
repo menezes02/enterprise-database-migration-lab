@@ -14,3 +14,10 @@
   tags:
     - ssh
     - security
+
+- name: Configure host firewall
+  ansible.builtin.import_tasks: firewall.yml
+  when: linux_baseline_manage_firewall | bool
+  tags:
+    - firewall
+    - security
