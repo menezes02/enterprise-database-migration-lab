@@ -1,22 +1,10 @@
 ---
-- name: Update APT package cache
-  ansible.builtin.apt:
-    update_cache: true
-    cache_valid_time: 3600
+- name: Configure baseline packages
+  ansible.builtin.import_tasks: packages.yml
+  tags:
+    - packages
 
-- name: Install Linux baseline packages
-  ansible.builtin.apt:
-    name: "{{ linux_baseline_packages }}"
-    state: present
-
-- name: Ensure auditd is enabled and running
-  ansible.builtin.service:
-    name: auditd
-    enabled: true
-    state: started
-
-- name: Ensure time synchronization is enabled and running
-  ansible.builtin.service:
-    name: systemd-timesyncd
-    enabled: true
-    state: started
+- name: Configure baseline services
+  ansible.builtin.import_tasks: services.yml
+  tags:
+    - services

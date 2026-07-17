@@ -1,0 +1,12 @@
+---
+- name: Ensure auditd is enabled and running
+  ansible.builtin.service:
+    name: auditd
+    enabled: true
+    state: started
+
+- name: Ensure time synchronization is enabled and running
+  ansible.builtin.service:
+    name: systemd-timesyncd
+    enabled: true
+    state: started
