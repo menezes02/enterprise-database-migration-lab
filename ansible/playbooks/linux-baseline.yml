@@ -1,0 +1,8 @@
+---
+- name: Apply Linux baseline
+  hosts: terraform_vms
+  become: true
+  gather_facts: true
+
+  roles:
+    - linux_baseline

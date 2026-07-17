@@ -1,0 +1,10 @@
+---
+linux_baseline_packages:
+  - auditd
+  - ca-certificates
+  - curl
+  - git
+  - htop
+  - jq
+  - unzip
+  - vim
