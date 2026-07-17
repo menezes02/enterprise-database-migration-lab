@@ -1,0 +1,15 @@
+# Managed by Ansible
+# Manual changes will be overwritten.
+
+Port {{ linux_baseline_ssh_port }}
+
+PermitRootLogin no
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PubkeyAuthentication yes
+
+X11Forwarding no
+MaxAuthTries 3
+
+ClientAliveInterval 300
+ClientAliveCountMax 2

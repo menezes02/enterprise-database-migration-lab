@@ -8,3 +8,9 @@
   ansible.builtin.import_tasks: services.yml
   tags:
     - services
+
+- name: Configure SSH security
+  ansible.builtin.import_tasks: ssh.yml
+  tags:
+    - ssh
+    - security
