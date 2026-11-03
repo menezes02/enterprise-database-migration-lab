@@ -21,7 +21,7 @@ all:
         tf-test-01:
           ansible_host: $VM_IP
   vars:
-    ansible_user: zintek
+    ansible_user: labadmin
     ansible_python_interpreter: /usr/bin/python3
 EOF
 
