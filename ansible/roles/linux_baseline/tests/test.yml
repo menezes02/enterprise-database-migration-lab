@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: Smoke test the linux_baseline role
+  hosts: localhost
   remote_user: root
   roles:
     - linux_baseline

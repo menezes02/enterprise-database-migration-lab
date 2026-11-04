@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: Terraform fmt, validate, tflint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform/environments/lab
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~> 1.15"
+          terraform_wrapper: false
+
+      - name: Create throwaway SSH key (the lab reads ~/.ssh/lab_ed25519.pub at plan time)
+        working-directory: .
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keygen -q -t ed25519 -N '' -f ~/.ssh/lab_ed25519 -C ci-validate-only
+
+      - name: terraform fmt
+        run: terraform fmt -check -recursive -diff
+
+      - name: terraform init (no backend)
+        run: terraform init -backend=false -input=false
+
+      - name: terraform validate
+        run: terraform validate
+
+      - uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: latest
+
+      - name: tflint
+        working-directory: .
+        run: |
+          tflint --init
+          tflint --config="$PWD/.tflint.hcl" --chdir=terraform/environments/lab
+
+  ansible:
+    name: ansible-lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ansible-lint
+        run: pip install ansible-lint ansible-core
+
+      - name: Install collections
+        working-directory: ansible
+        run: ansible-galaxy collection install -r collections/requirements.yml
+
+      - name: ansible-lint
+        working-directory: ansible
+        run: ansible-lint playbooks roles

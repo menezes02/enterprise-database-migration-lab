@@ -1,8 +1,14 @@
 # Enterprise Database Migration and Security Lab
 
+[![CI](https://github.com/menezes02/enterprise-database-migration-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/menezes02/enterprise-database-migration-lab/actions/workflows/ci.yml)
+
 A hands-on infrastructure automation, Linux security, database engineering, monitoring, and migration lab built on Ubuntu Server, KVM/libvirt, Terraform, Ansible, GitHub, and Python.
 
 The project is designed to reproduce the engineering principles used in a large enterprise environment through a smaller representative lab.
+
+## Continuous integration
+
+Every push and pull request runs `terraform fmt -check`, `terraform validate`, `tflint` and `ansible-lint` (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)). The Terraform job generates a throwaway SSH key because the lab reads `~/.ssh/lab_ed25519.pub` at plan time; no credentials or state are used.
 
 ## Project purpose
 
